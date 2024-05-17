@@ -81,6 +81,11 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="SH.MainForm"/>
       </Unit>
+      <Unit>
+        <Filename Value="..\..\Source\sh.core.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SH.Core"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

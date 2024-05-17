@@ -11,7 +11,8 @@ uses
   Controls,
   Graphics,
   Dialogs,
-  Grids;
+  Grids,
+  SH.Core;
 
 type
   TMainForm = class(TForm)
@@ -21,6 +22,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
   strict private
     procedure FillGridTitle;
+    procedure FillGrid;
   end;
 
 var
@@ -72,6 +74,11 @@ begin
   SetCellAt(Grid, 1, 'Размер');
   SetCellAt(Grid, 2, 'Описание');
   SetCellAt(Grid, 3, 'Граничные значения (если есть)');
+end;
+
+procedure TMainForm.FillGrid;
+begin
+
 end;
 
 { =========================================================================== }
