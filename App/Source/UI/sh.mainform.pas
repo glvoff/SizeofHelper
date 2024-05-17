@@ -1,18 +1,11 @@
 unit SH.MainForm;
 
-{$mode objfpc}{$H+}
+{$I 'app.inc'}
 
 interface
 
 uses
-  Classes,
-  SysUtils,
-  Generics.Collections,
-  Forms,
-  Controls,
-  Graphics,
-  Dialogs,
-  Grids;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, Grids;
 
 type
   TMainForm = class(TForm)
