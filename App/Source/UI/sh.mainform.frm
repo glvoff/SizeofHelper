@@ -7,9 +7,11 @@ object MainForm: TMainForm
   ClientHeight = 367
   ClientWidth = 630
   DesignTimePPI = 192
+  KeyPreview = True
   LCLVersion = '8.3'
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnKeyDown = FormKeyDown
   object Grid: TStringGrid
     Left = 0
     Height = 367
