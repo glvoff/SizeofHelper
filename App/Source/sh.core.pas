@@ -22,21 +22,22 @@ type
     Value: integer;
     Range: TValueRange;
     constructor Create(const InTypename: WideString; const InDescription: WideString; const InValue: integer; const InRange: TValueRange);
+    constructor Create(const Source: TSizeofInfo);
   end;
 
-  TSizeofInfoCollection = specialize TList<PSizeofInfo>;
+  TSizeofInfoCollection = specialize TList<TSizeofInfo>;
 
-  TSizeInfoBuilder = class
+  TSizeofInfoBuilder = class
   strict private
     FBufferInfo: TSizeofInfo;
   public
     constructor Create;
     destructor Destroy; override;
-    function Build: PSizeofInfo;
-    function WithTypeName(const InTypeName: WideString): TSizeInfoBuilder;
-    function WithDescription(const Description: WideString): TSizeInfoBuilder;
-    function WithValue(const Value: integer): TSizeInfoBuilder;
-    function WithRange(const Range: TValueRange): TSizeInfoBuilder;
+    function Build: TSizeofInfo;
+    function WithTypeName(const InTypeName: WideString): TSizeofInfoBuilder;
+    function WithDescription(const Description: WideString): TSizeofInfoBuilder;
+    function WithValue(const Value: integer): TSizeofInfoBuilder;
+    function WithRange(const Range: TValueRange): TSizeofInfoBuilder;
   end;
 
 implementation
@@ -55,45 +56,49 @@ begin
   Self.Range := InRange;
 end;
 
-constructor TSizeInfoBuilder.Create;
+constructor TSizeofInfo.Create(const Source: TSizeofInfo);
+begin
+  Self.TypeName := Source.TypeName;
+  Self.Description := Source.Description;
+  Self.Value := Source.Value;
+  Self.Range := Source.Range;
+end;
+
+constructor TSizeofInfoBuilder.Create;
 begin
   inherited Create;
   FBufferInfo := TSizeofInfo.Create('', '', 0, TValueRange.Create(0, 0));
 end;
 
-destructor TSizeInfoBuilder.Destroy;
+destructor TSizeofInfoBuilder.Destroy;
 begin
   inherited Destroy;
 end;
 
-function TSizeInfoBuilder.Build: PSizeofInfo;
+function TSizeofInfoBuilder.Build: TSizeofInfo;
 begin
-  New(Result);
-  Result^.Description := FBufferInfo.Description;
-  Result^.TypeName := FBufferInfo.TypeName;
-  Result^.Value := FBufferInfo.Value;
-  Result^.Range := FBufferInfo.Range;
+  Result := TSizeofInfo.Create(FBufferInfo);
 end;
 
-function TSizeInfoBuilder.WithTypeName(const InTypeName: WideString): TSizeInfoBuilder;
+function TSizeofInfoBuilder.WithTypeName(const InTypeName: WideString): TSizeofInfoBuilder;
 begin
   FBufferInfo.TypeName := InTypeName;
   Result := Self;
 end;
 
-function TSizeInfoBuilder.WithDescription(const Description: WideString): TSizeInfoBuilder;
+function TSizeofInfoBuilder.WithDescription(const Description: WideString): TSizeofInfoBuilder;
 begin
   FBufferInfo.Description := Description;
   Result := Self;
 end;
 
-function TSizeInfoBuilder.WithValue(const Value: integer): TSizeInfoBuilder;
+function TSizeofInfoBuilder.WithValue(const Value: integer): TSizeofInfoBuilder;
 begin
   FBufferInfo.Value := Value;
   Result := Self;
 end;
 
-function TSizeInfoBuilder.WithRange(const Range: TValueRange): TSizeInfoBuilder;
+function TSizeofInfoBuilder.WithRange(const Range: TValueRange): TSizeofInfoBuilder;
 begin
   FBufferInfo.Range := Range;
   Result := Self;

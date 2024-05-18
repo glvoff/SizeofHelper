@@ -55,6 +55,7 @@ end;
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
   FillGridTitle();
+  FillGrid();
 end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
@@ -77,8 +78,36 @@ begin
 end;
 
 procedure TMainForm.FillGrid;
+var
+  Items: TSizeofInfoCollection;
+  SB: TSizeofInfoBuilder;
+  P: TSizeofInfo;
+  I: Integer;
 begin
+  Items := TSizeofInfoCollection.Create;
+  Items.Capacity := 0;
+  Items.Count :=0;
+  SB := TSizeofInfoBuilder.Create();
+  try
+    P := SB.WithTypeName('Integer')
+      .WithDescription('This is simple Integer type')
+      .WithRange(TValueRange.Create(0,0))
+      .WithValue(Sizeof(Integer))
+      .Build();
+    Items.Add(P);
 
+    Grid.RowCount := Items.Count + 1;
+    for I := 1 to Items.Count do
+    begin
+      Grid.Cells[0, I] := P.TypeName;
+      Grid.Cells[1, I] := '<todo>';
+      Grid.Cells[2, I] := '<todo>';
+      Grid.Cells[3, I] := '<todo>';
+    end;
+  finally
+    FreeAndNil(SB);
+    FreeAndNil(Items);
+  end;
 end;
 
 { =========================================================================== }
