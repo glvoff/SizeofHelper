@@ -54,7 +54,6 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
-  FillGridTitle();
   FillGrid();
 end;
 
@@ -96,6 +95,7 @@ begin
       .Build();
     Items.Add(P);
 
+    FillGridTitle();
     Grid.RowCount := Items.Count + 1;
     for I := 1 to Items.Count do
     begin
