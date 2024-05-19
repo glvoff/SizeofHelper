@@ -12,6 +12,7 @@ type
     Minimal: integer;
     Maximal: integer;
     constructor Create(const InMinimal: integer; const InMaximal: integer);
+    function ToString: WideString;
   end;
 
   PSizeofInfo = ^TSizeofInfo;
@@ -42,10 +43,18 @@ type
 
 implementation
 
+uses
+  SysUtils;
+
 constructor TValueRange.Create(const InMinimal: integer; const InMaximal: integer);
 begin
   Self.Minimal := InMinimal;
   Self.Maximal := InMaximal;
+end;
+
+function TValueRange.ToString: WideString;
+begin
+  Result := WideFormat('%d..%d', [Minimal, Maximal]);
 end;
 
 constructor TSizeofInfo.Create(const InTypename: WideString; const InDescription: WideString; const InValue: integer; const InRange: TValueRange);

@@ -21,8 +21,12 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
   strict private
-    procedure FillGridTitle;
+    FInfos: TSizeofInfoCollection;
     procedure FillGrid;
+    procedure InitializeGrid;
+    procedure RenderTitle;
+    procedure RenderSizeofInfos;
+    procedure RenderSizeofInfoAt(const Info: TSizeofInfo; const Index: integer);
   end;
 
 var
@@ -32,21 +36,24 @@ implementation
 
 {$R *.frm}
 
+uses
+  SH.StdTypes;
+
 { =========================================================================== }
 
-function IsEscape(const InCode: Word): Boolean;
+function IsEscape(const InCode: word): boolean;
 begin
   Result := InCode = 27;
 end;
 
-function CalcWidth(const InText: string): Integer;
+function CalcWidth(const InText: string): integer;
 begin
-  Result := Length(InText) * 8;
+  Result := Length(InText)*8;
 end;
 
-procedure SetCellAt(const Grid: TStringGrid; const InPosition: Integer; const InText: string);
+procedure SetCellAt(const Grid: TStringGrid; const InPosition: integer; const InText: string);
 begin
-  Grid.Cells[InPosition, 0] := InText;
+  Grid.Cells[InPosition, 0]  := InText;
   Grid.ColWidths[InPosition] := CalcWidth(InText);
 end;
 
@@ -54,11 +61,14 @@ end;
 
 procedure TMainForm.FormCreate(Sender: TObject);
 begin
+  FInfos := TSizeofInfoCollection.Create();
+  SH.StdTypes.RegisterSizeofInformation(FInfos);
   FillGrid();
 end;
 
 procedure TMainForm.FormDestroy(Sender: TObject);
 begin
+  FreeAndNil(FInfos);
 end;
 
 procedure TMainForm.FormKeyDown(Sender: TObject; var Key: word; Shift: TShiftState);
@@ -67,47 +77,41 @@ begin
     Close();
 end;
 
-procedure TMainForm.FillGridTitle;
+procedure TMainForm.FillGrid;
+begin
+  InitializeGrid;
+  RenderTitle;
+  RenderSizeofInfos;
+end;
+
+procedure TMainForm.InitializeGrid;
 begin
   Grid.ColCount := 4;
+  Grid.RowCount := FInfos.Count+1;
+end;
+
+procedure TMainForm.RenderTitle;
+begin
   SetCellAt(Grid, 0, 'Тип данных');
   SetCellAt(Grid, 1, 'Размер');
   SetCellAt(Grid, 2, 'Описание');
   SetCellAt(Grid, 3, 'Граничные значения (если есть)');
 end;
 
-procedure TMainForm.FillGrid;
+procedure TMainForm.RenderSizeofInfos;
 var
-  Items: TSizeofInfoCollection;
-  SB: TSizeofInfoBuilder;
-  P: TSizeofInfo;
-  I: Integer;
+  Index: integer;
 begin
-  Items := TSizeofInfoCollection.Create;
-  Items.Capacity := 0;
-  Items.Count :=0;
-  SB := TSizeofInfoBuilder.Create();
-  try
-    P := SB.WithTypeName('Integer')
-      .WithDescription('This is simple Integer type')
-      .WithRange(TValueRange.Create(0,0))
-      .WithValue(Sizeof(Integer))
-      .Build();
-    Items.Add(P);
+  for Index := 1 to FInfos.Count do
+    RenderSizeofInfoAt(FInfos[Index-1], Index);
+end;
 
-    FillGridTitle();
-    Grid.RowCount := Items.Count + 1;
-    for I := 1 to Items.Count do
-    begin
-      Grid.Cells[0, I] := P.TypeName;
-      Grid.Cells[1, I] := '<todo>';
-      Grid.Cells[2, I] := '<todo>';
-      Grid.Cells[3, I] := '<todo>';
-    end;
-  finally
-    FreeAndNil(SB);
-    FreeAndNil(Items);
-  end;
+procedure TMainForm.RenderSizeofInfoAt(const Info: TSizeofInfo; const Index: integer);
+begin
+  Grid.Cells[0, Index] := Info.TypeName;
+  Grid.Cells[1, Index] := Info.Value.ToString();
+  Grid.Cells[2, Index] := Info.Range.ToString();
+  Grid.Cells[3, Index] := Info.Description;
 end;
 
 { =========================================================================== }

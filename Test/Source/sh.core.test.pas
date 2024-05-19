@@ -23,6 +23,11 @@ type
     procedure TestCopyConstructor;
   end;
 
+  TValueRangeTest = class(TTestCase)
+  published
+    procedure TestToString;
+  end;
+
 implementation
 
 { ==== TSizeofInfoBuilderTest =============================================== }
@@ -64,9 +69,17 @@ begin
   AssertEquals(4, C.Range.Maximal);
 end;
 
-{ ==== TSizeofInfoTest ====================================================== }
+{ ==== TValueRangeTest ===================================================== }
+
+procedure TValueRangeTest.TestToString;
+begin
+  AssertEquals('1..2', TValueRange.Create(1,2).ToString());
+end;
+
+{ =========================================================================== }
 
 initialization
   RegisterTest(TSizeofInfoBuilderTest);
   RegisterTest(TSizeofInfoTest);
+  RegisterTest(TValueRangeTest);
 end.

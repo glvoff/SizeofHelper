@@ -86,6 +86,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="SH.Core"/>
       </Unit>
+      <Unit>
+        <Filename Value="..\..\Source\sh.stdtypes.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SH.StdTypes"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
