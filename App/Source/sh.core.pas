@@ -54,7 +54,7 @@ end;
 
 function TValueRange.ToString: WideString;
 begin
-  Result := WideFormat('%d..%d', [Minimal, Maximal]);
+  Result := WideFormat('%d .. %d', [Minimal, Maximal]);
 end;
 
 constructor TSizeofInfo.Create(const InTypename: WideString; const InDescription: WideString; const InValue: integer; const InRange: TValueRange);

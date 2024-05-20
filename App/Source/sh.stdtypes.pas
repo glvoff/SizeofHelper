@@ -24,7 +24,12 @@ begin
     P := SB
       .WithTypeName('Integer')
       .WithDescription('This is simple Integer type')
-      .WithRange(TValueRange.Create(0, 0))
+      .WithRange(
+        TValueRange.Create(
+          Integer.MinValue,
+          Integer.MaxValue
+        )
+      )
       .WithValue(Sizeof(integer))
       .Build();
     Collection.Add(P);
