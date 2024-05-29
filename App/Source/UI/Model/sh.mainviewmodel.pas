@@ -41,7 +41,12 @@ uses
 
 function TMainViewModel.GetTitles: TTitles;
 begin
-  Result := ['Тип данных', 'Размер', 'Описание', 'Граничные значения (если есть)'];
+  Result := [
+    TTitle.Create('Тип данных', 200),
+    TTitle.Create('Размер', 150),
+    TTitle.Create('Описание', 350),
+    TTitle.Create('Граничные значения (если есть)', 400)
+  ];
 end;
 
 function TMainViewModel.GetInfos(const Index: integer): TSizeofInfo;

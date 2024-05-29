@@ -8,7 +8,13 @@ uses
   SH.Core;
 
 type
-  TTitles = TArray<string>;
+  TTitle = packed record
+    Caption: string;
+    Width: Integer;
+    constructor Create(const Caption: string; const Width: Integer);
+  end;
+
+  TTitles = TArray<TTitle>;
 
   TOnUpdate = reference to procedure(const Titles: TTitles; const Items: TSizeofInfoCollection);
 
@@ -18,5 +24,11 @@ type
   end;
 
 implementation
+
+constructor TTitle.Create(const Caption: string; const Width: Integer);
+begin
+  Self.Caption := Caption;
+  Self.Width := Width;
+end;
 
 end.

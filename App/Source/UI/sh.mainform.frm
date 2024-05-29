@@ -1,11 +1,11 @@
 object MainForm: TMainForm
   Left = 0
-  Height = 500
+  Height = 900
   Top = 0
-  Width = 1003
+  Width = 1209
   Caption = 'MainForm'
-  ClientHeight = 500
-  ClientWidth = 1003
+  ClientHeight = 900
+  ClientWidth = 1209
   DesignTimePPI = 192
   KeyPreview = True
   LCLVersion = '8.3'
@@ -14,9 +14,9 @@ object MainForm: TMainForm
   OnKeyDown = FormKeyDown
   object Grid: TStringGrid
     Left = 0
-    Height = 500
+    Height = 900
     Top = 0
-    Width = 1003
+    Width = 1209
     Align = alClient
     FixedCols = 0
     TabOrder = 0

@@ -103,8 +103,8 @@ var
 begin
   for I := 0 to Length(Titles) - 1 do
   begin
-    Grid.Cells[I, 0] := Titles[I];
-    Grid.ColWidths[I] := 350;
+    Grid.Cells[I, 0] := Titles[I].Caption;
+    Grid.ColWidths[I] := Titles[I].Width;
   end;
 end;
 
