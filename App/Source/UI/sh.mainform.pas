@@ -81,9 +81,14 @@ end;
 
 procedure TMainForm.OnUpdate(const Titles: TTitles; const Items: TSizeofInfoCollection);
 begin
-  InitializeGrid(Items.Count);
-  RenderTitle(Titles);
-  RenderSizeofInfos(Items);
+  Grid.BeginUpdate();
+  try
+    InitializeGrid(Items.Count);
+    RenderTitle(Titles);
+    RenderSizeofInfos(Items);
+  finally
+    Grid.EndUpdate();
+  end;
 end;
 
 procedure TMainForm.InitializeGrid(const Count: integer);
@@ -97,7 +102,10 @@ var
   I: integer;
 begin
   for I := 0 to Length(Titles) - 1 do
-    Grid.SmartCell[I, 0] := Titles[I];
+  begin
+    Grid.Cells[I, 0] := Titles[I];
+    Grid.ColWidths[I] := 350;
+  end;
 end;
 
 procedure TMainForm.RenderSizeofInfos(const Infos: TSizeofInfoCollection);
