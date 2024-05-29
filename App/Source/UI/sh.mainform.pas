@@ -113,10 +113,10 @@ var
   Index: integer;
   Rec: TSizeofInfo;
 begin
-  for Index := 0 to Infos.Count-1 do
+  for Index := 0 to Infos.Count - 1 do
   begin
     Rec := Infos[Index];
-    RenderSizeofInfoAt(Rec, Index+1);
+    RenderSizeofInfoAt(Rec, Index + 1);
   end;
 end;
 
