@@ -12,17 +12,17 @@ type
     Minimal: integer;
     Maximal: integer;
     constructor Create(const InMinimal: integer; const InMaximal: integer);
-    function ToString: WideString;
+    function ToString: string;
   end;
 
   PSizeofInfo = ^TSizeofInfo;
 
   TSizeofInfo = packed record
-    TypeName: WideString;
-    Description: WideString;
+    TypeName: string;
+    Description: string;
     Value: integer;
     Range: TValueRange;
-    constructor Create(const InTypename: WideString; const InDescription: WideString; const InValue: integer; const InRange: TValueRange); overload;
+    constructor Create(const InTypename, InDescription: string; const InValue: integer; const InRange: TValueRange); overload;
     constructor Create(const Source: TSizeofInfo); overload;
   end;
 
@@ -35,8 +35,8 @@ type
     constructor Create;
     destructor Destroy; override;
     function Build: TSizeofInfo;
-    function WithTypeName(const InTypeName: WideString): TSizeofInfoBuilder;
-    function WithDescription(const Description: WideString): TSizeofInfoBuilder;
+    function WithTypeName(const InTypeName: string): TSizeofInfoBuilder;
+    function WithDescription(const Description: string): TSizeofInfoBuilder;
     function WithValue(const Value: integer): TSizeofInfoBuilder;
     function WithRange(const Range: TValueRange): TSizeofInfoBuilder;
   end;
@@ -52,12 +52,12 @@ begin
   Self.Maximal := InMaximal;
 end;
 
-function TValueRange.ToString: WideString;
+function TValueRange.ToString: string;
 begin
-  Result := WideFormat('%d .. %d', [Minimal, Maximal]);
+  Result := Format('%d .. %d', [Minimal, Maximal]);
 end;
 
-constructor TSizeofInfo.Create(const InTypename: WideString; const InDescription: WideString; const InValue: integer; const InRange: TValueRange);
+constructor TSizeofInfo.Create(const InTypename, InDescription: string; const InValue: integer; const InRange: TValueRange);
 begin
   Self.TypeName := InTypeName;
   Self.Description := InDescription;
@@ -89,13 +89,13 @@ begin
   Result := TSizeofInfo.Create(FBufferInfo);
 end;
 
-function TSizeofInfoBuilder.WithTypeName(const InTypeName: WideString): TSizeofInfoBuilder;
+function TSizeofInfoBuilder.WithTypeName(const InTypeName: string): TSizeofInfoBuilder;
 begin
   FBufferInfo.TypeName := InTypeName;
   Result := Self;
 end;
 
-function TSizeofInfoBuilder.WithDescription(const Description: WideString): TSizeofInfoBuilder;
+function TSizeofInfoBuilder.WithDescription(const Description: string): TSizeofInfoBuilder;
 begin
   FBufferInfo.Description := Description;
   Result := Self;
