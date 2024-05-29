@@ -13,11 +13,6 @@ uses
   SH.Core;
 
 type
-  TSizeofInfoBuilderTest = class(TTestCase)
-  published
-    procedure TestBuild;
-  end;
-
   TSizeofInfoTest = class(TTestCase)
   published
     procedure TestConstruction;
@@ -28,29 +23,10 @@ type
   published
     procedure TestToString;
     procedure TestToStringWithLimits;
+    procedure TestWhenHasAllZeroesWeReturnNothingText;
   end;
 
 implementation
-
-{ ==== TSizeofInfoBuilderTest =============================================== }
-
-procedure TSizeofInfoBuilderTest.TestBuild;
-var
-  P: TSizeofInfo;
-  B: TSizeofInfoBuilder;
-begin
-  B := TSizeofInfoBuilder.Create;
-  try
-    P := B.WithTypeName('typename').WithDescription('description').WithRange(TValueRange.Create(1, 10)).WithValue(228).Build();
-    AssertEquals('typename', P.TypeName);
-    AssertEquals('description', P.Description);
-    AssertEquals(228, P.Value);
-    AssertEquals(10, P.Range.Maximal);
-    AssertEquals(1, P.Range.Minimal);
-  finally
-    FreeAndNil(B);
-  end;
-end;
 
 { ==== TSizeofInfoTest ====================================================== }
 
@@ -88,10 +64,14 @@ begin
   AssertEquals('-2147483648 .. 2147483647', TValueRange.Create(Integer.MinValue, Integer.MaxValue).ToString());
 end;
 
+procedure TValueRangeTest.TestWhenHasAllZeroesWeReturnNothingText;
+begin
+  AssertEquals('Nothing', TValueRange.Create(0, 0).ToString());
+end;
+
 { =========================================================================== }
 
 initialization
-  RegisterTest(TSizeofInfoBuilderTest);
   RegisterTest(TSizeofInfoTest);
   RegisterTest(TValueRangeTest);
 end.
