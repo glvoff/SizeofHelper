@@ -11,7 +11,13 @@ uses
   {$ENDIF}
   Interfaces, // this includes the CT adLCL widgetset
   Forms,
-  SH.MainForm, SH.Core, SH.StdTypes { you can add units after this };
+  SH.MainForm,
+  SH.Core,
+  SH.StdTypes,
+  SH.MainViewModel,
+  SH.ViewModel,
+  GLV.Logging.Ifaces,
+  GLV.Logging.Files { you can add units after this };
 
   {$R *.res}
 

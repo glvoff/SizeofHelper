@@ -22,11 +22,11 @@ type
     Description: WideString;
     Value: integer;
     Range: TValueRange;
-    constructor Create(const InTypename: WideString; const InDescription: WideString; const InValue: integer; const InRange: TValueRange);
-    constructor Create(const Source: TSizeofInfo);
+    constructor Create(const InTypename: WideString; const InDescription: WideString; const InValue: integer; const InRange: TValueRange); overload;
+    constructor Create(const Source: TSizeofInfo); overload;
   end;
 
-  TSizeofInfoCollection = specialize TList<TSizeofInfo>;
+  TSizeofInfoCollection = TList<TSizeofInfo>;
 
   TSizeofInfoBuilder = class
   strict private

@@ -1,5 +1,6 @@
 {$IFDEF FPC}
-{$MODE OBJFPC}{$H+}
+{$MODE DELPHI}{$H+}
+//{$MODE OBJFPC}{$H+}
 {$MODESWITCH advancedrecords}
 {$MODESWITCH typehelpers}
 {$MODESWITCH anonymousfunctions}

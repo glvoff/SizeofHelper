@@ -4,7 +4,7 @@ program test;
 
 uses
   Classes,
-  consoletestrunner, SH.Core.Test;
+  consoletestrunner, SH.Core.Test, GLV.Logging.Files.Test;
 
 type
 

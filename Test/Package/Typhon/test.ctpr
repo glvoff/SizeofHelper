@@ -29,6 +29,9 @@
     </RunParams>
     <RequiredPackages>
       <Item>
+        <PackageName Value="adLCLBase"/>
+      </Item>
+      <Item>
         <PackageName Value="adFCL"/>
       </Item>
     </RequiredPackages>
@@ -42,6 +45,11 @@
         <Filename Value="..\..\Source\sh.core.test.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="SH.Core.Test"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\Source\glv.logging.files.test.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GLV.Logging.Files.Test"/>
       </Unit>
     </Units>
   </ProjectOptions>

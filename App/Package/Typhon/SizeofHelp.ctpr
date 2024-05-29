@@ -30,7 +30,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir);..\..\Source"/>
-            <OtherUnitFiles Value="..\..\Source\UI;..\..\Source"/>
+            <OtherUnitFiles Value="..\..\Source\UI;..\..\Source;..\..\Source\UI\Model"/>
             <UnitOutputDirectory Value="..\..\_Out\$(TargetCPU)-$(TargetOS)\Release"/>
           </SearchPaths>
           <CodeGeneration>
@@ -91,6 +91,26 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="SH.StdTypes"/>
       </Unit>
+      <Unit>
+        <Filename Value="..\..\Source\UI\Model\sh.mainviewmodel.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SH.MainViewModel"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\Source\UI\Model\sh.viewmodel.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SH.ViewModel"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\Source\glv.logging.ifaces.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GLV.Logging.Ifaces"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\Source\glv.logging.files.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GLV.Logging.Files"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -101,7 +121,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir);..\..\Source"/>
-      <OtherUnitFiles Value="..\..\Source\UI;..\..\Source"/>
+      <OtherUnitFiles Value="..\..\Source\UI;..\..\Source;..\..\Source\UI\Model"/>
       <UnitOutputDirectory Value="..\..\_Out\$(TargetCPU)-$(TargetOS)\Debug"/>
     </SearchPaths>
     <Parsing>
