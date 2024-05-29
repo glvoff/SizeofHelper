@@ -4,7 +4,12 @@
     <Version Value="12"/>
     <PathDelim Value="\"/>
     <General>
-      <SessionStorage Value="InProjectDir"/>
+      <Flags>
+        <SaveClosedFiles Value="False"/>
+        <SaveJumpHistory Value="False"/>
+        <SaveFoldState Value="False"/>
+      </Flags>
+      <SessionStorage Value="None"/>
       <Title Value="SizeofHelp"/>
       <Scaled Value="True"/>
       <ResourceType Value="res"/>
@@ -21,15 +26,18 @@
           <Version Value="11"/>
           <PathDelim Value="\"/>
           <Target>
-            <Filename Value="..\..\..\Out\SizeofHelp"/>
+            <Filename Value="..\..\..\_Out\SizeofHelp"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir);..\..\Source"/>
-            <OtherUnitFiles Value="..\..\Source\UI;..\..\Source"/>
-            <UnitOutputDirectory Value="..\..\Out\$(TargetCPU)-$(TargetOS)\Release"/>
+            <OtherUnitFiles Value="..\..\Source\UI;..\..\Source;..\..\Source\UI\Model"/>
+            <UnitOutputDirectory Value="..\..\_Out\$(TargetCPU)-$(TargetOS)\Release"/>
           </SearchPaths>
           <CodeGeneration>
             <SmartLinkUnit Value="True"/>
+            <Optimizations>
+              <OptimizationLevel Value="2"/>
+            </Optimizations>
           </CodeGeneration>
           <Linking>
             <Debugging>
@@ -69,8 +77,39 @@
         <FRMtype Value="200"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="MainForm"/>
+        <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="SH.MainForm"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\Source\sh.core.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SH.Core"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\Source\sh.stdtypes.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SH.StdTypes"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\Source\UI\Model\sh.mainviewmodel.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SH.MainViewModel"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\Source\UI\Model\sh.viewmodel.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="SH.ViewModel"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\Source\glv.logging.ifaces.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GLV.Logging.Ifaces"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\Source\glv.logging.files.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="GLV.Logging.Files"/>
       </Unit>
     </Units>
   </ProjectOptions>
@@ -78,12 +117,12 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="..\..\..\Out\SizeofHelp"/>
+      <Filename Value="..\..\..\_Out\SizeofHelp"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir);..\..\Source"/>
-      <OtherUnitFiles Value="..\..\Source\UI;..\..\Source"/>
-      <UnitOutputDirectory Value="..\..\Out\$(TargetCPU)-$(TargetOS)\Debug"/>
+      <OtherUnitFiles Value="..\..\Source\UI;..\..\Source;..\..\Source\UI\Model"/>
+      <UnitOutputDirectory Value="..\..\_Out\$(TargetCPU)-$(TargetOS)\Debug"/>
     </SearchPaths>
     <Parsing>
       <SyntaxOptions>
@@ -98,6 +137,9 @@
         <StackChecks Value="True"/>
       </Checks>
       <VerifyObjMethodCallValidity Value="True"/>
+      <Optimizations>
+        <OptimizationLevel Value="0"/>
+      </Optimizations>
     </CodeGeneration>
     <Linking>
       <Debugging>
